@@ -13,9 +13,9 @@ interface Todo {
 type Priority = 'high' | 'medium' | 'low';
 
 const priorityConfig = {
-  high: { label: '高', color: 'from-red-500 to-orange-500', bgColor: 'bg-red-500/20', borderColor: 'border-red-500/50', textColor: 'text-red-400' },
-  medium: { label: '中', color: 'from-yellow-500 to-amber-500', bgColor: 'bg-yellow-500/20', borderColor: 'border-yellow-500/50', textColor: 'text-yellow-400' },
-  low: { label: '低', color: 'from-green-500 to-emerald-500', bgColor: 'bg-green-500/20', borderColor: 'border-green-500/50', textColor: 'text-green-400' },
+  high: { label: '高', color: 'from-red-600 to-red-500', bgColor: 'bg-red-500/20', borderColor: 'border-red-500/50', textColor: 'text-red-500', glow: 'shadow-red-500/50 shadow-lg' },
+  medium: { label: '中', color: 'from-orange-500 to-amber-500', bgColor: 'bg-orange-500/20', borderColor: 'border-orange-500/50', textColor: 'text-orange-500', glow: 'shadow-orange-500/50 shadow-lg' },
+  low: { label: '低', color: 'from-emerald-500 to-green-500', bgColor: 'bg-green-500/20', borderColor: 'border-green-500/50', textColor: 'text-green-500', glow: 'shadow-green-500/50 shadow-lg' },
 };
 
 export default function Home() {
@@ -147,16 +147,16 @@ export default function Home() {
                 </button>
               </div>
               {/* 优先级选择 */}
-              <div className="flex gap-2 items-center">
+              <div className="flex gap-3 items-center">
                 <span className="text-gray-400 text-sm">优先级:</span>
                 {(Object.keys(priorityConfig) as Priority[]).map((p) => (
                   <button
                     key={p}
                     onClick={() => setSelectedPriority(p)}
-                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
+                    className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-200 ${
                       selectedPriority === p
-                        ? `${priorityConfig[p].color} text-white shadow-lg`
-                        : 'bg-white/5 text-gray-400 hover:bg-white/10'
+                        ? `bg-gradient-to-r ${priorityConfig[p].color} text-white ${priorityConfig[p].glow}`
+                        : 'bg-white/10 text-gray-400 hover:bg-white/20 border border-white/10'
                     }`}
                   >
                     {priorityConfig[p].label}
@@ -199,11 +199,11 @@ export default function Home() {
                 <button
                   key={p}
                   onClick={() => setPriorityFilter(p)}
-                  className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
+                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
                     priorityFilter === p
                       ? p === 'all' 
-                        ? 'bg-white/20 text-white'
-                        : `${priorityConfig[p as Priority].color} text-white`
+                        ? 'bg-white/30 text-white'
+                        : `bg-gradient-to-r ${priorityConfig[p as Priority].color} text-white shadow-lg`
                       : 'bg-white/5 text-gray-500 hover:bg-white/10'
                   }`}
                 >
@@ -247,10 +247,10 @@ export default function Home() {
                           <button
                             key={p}
                             onClick={() => setEditPriority(p)}
-                            className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
+                            className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
                               editPriority === p
-                                ? `${priorityConfig[p].color} text-white`
-                                : 'bg-white/5 text-gray-400'
+                                ? `bg-gradient-to-r ${priorityConfig[p].color} text-white shadow-lg`
+                                : 'bg-white/10 text-gray-400 hover:bg-white/20'
                             }`}
                           >
                             {priorityConfig[p].label}
