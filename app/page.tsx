@@ -13,9 +13,9 @@ interface Todo {
 type Priority = 'high' | 'medium' | 'low';
 
 const priorityConfig = {
-  high: { label: '高', color: 'from-red-600 to-red-500', bgColor: 'bg-red-500/20', borderColor: 'border-red-500/50', textColor: 'text-red-500', glow: 'shadow-red-500/50 shadow-lg' },
-  medium: { label: '中', color: 'from-orange-500 to-amber-500', bgColor: 'bg-orange-500/20', borderColor: 'border-orange-500/50', textColor: 'text-orange-500', glow: 'shadow-orange-500/50 shadow-lg' },
-  low: { label: '低', color: 'from-emerald-500 to-green-500', bgColor: 'bg-green-500/20', borderColor: 'border-green-500/50', textColor: 'text-green-500', glow: 'shadow-green-500/50 shadow-lg' },
+  high: { label: '高', color: 'from-red-600 to-red-500', bgColor: 'bg-red-500/30', borderColor: 'border-red-500', textColor: 'text-red-400', glow: 'shadow-red-500/50 shadow-lg', accent: '#ef4444' },
+  medium: { label: '中', color: 'from-orange-500 to-amber-500', bgColor: 'bg-orange-500/30', borderColor: 'border-orange-500', textColor: 'text-orange-400', glow: 'shadow-orange-500/50 shadow-lg', accent: '#f97316' },
+  low: { label: '低', color: 'from-emerald-500 to-green-500', bgColor: 'bg-green-500/30', borderColor: 'border-green-500', textColor: 'text-green-400', glow: 'shadow-green-500/50 shadow-lg', accent: '#22c55e' },
 };
 
 export default function Home() {
@@ -226,10 +226,13 @@ export default function Home() {
               filteredTodos.map((todo) => (
                 <div
                   key={todo.id}
-                  className={`border-b border-white/5 p-4 hover:bg-white/5 transition-colors ${
-                    todo.completed ? 'opacity-60' : ''
+                  className={`border-b border-white/5 p-4 hover:bg-white/10 transition-all duration-200 ${
+                    todo.completed ? 'opacity-50' : ''
                   } ${priorityConfig[todo.priority].bgColor}`}
-                  style={{ borderLeft: `3px solid ${todo.priority === 'high' ? '#ef4444' : todo.priority === 'medium' ? '#eab308' : '#22c55e'}` }}
+                  style={{ 
+                    borderLeft: `4px solid ${priorityConfig[todo.priority].accent}`,
+                    background: todo.completed ? 'rgba(255,255,255,0.02)' : `${priorityConfig[todo.priority].accent}15`
+                  }}
                 >
                   {editingId === todo.id ? (
                     <div className="flex flex-col gap-2">
@@ -282,9 +285,9 @@ export default function Home() {
                         <div className={`${todo.completed ? 'line-through text-gray-500' : 'text-white'}`}>
                           {todo.text}
                         </div>
-                        <div className="text-xs text-gray-500 mt-1 flex items-center gap-2">
-                          <span>🕐 {formatDateTime(todo.createdAt)}</span>
-                          <span className={`px-2 py-0.5 rounded-full text-xs ${priorityConfig[todo.priority].bgColor} ${priorityConfig[todo.priority].textColor}`}>
+                        <div className="text-xs mt-1 flex items-center gap-2 flex-wrap">
+                          <span className="text-gray-500">🕐 {formatDateTime(todo.createdAt)}</span>
+                          <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${priorityConfig[todo.priority].bgColor} ${priorityConfig[todo.priority].textColor} border ${priorityConfig[todo.priority].borderColor}`}>
                             {priorityConfig[todo.priority].label}优先级
                           </span>
                         </div>
