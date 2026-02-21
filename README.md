@@ -1,36 +1,177 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🤖 Gitty TodoList
 
-## Getting Started
+> 一个具有现代科技风格的智能任务管理应用
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.0-38bdf8?style=flat&logo=tailwind-css)
+
+## ✨ 特性
+
+### 核心功能
+- ✅ **任务管理** - 添加、编辑、删除任务
+- ✅ **任务完成标记** - 勾选完成状态
+- ✅ **优先级系统** - 高/中/低三档优先级，不同颜色区分
+- ⏰ **时间记录** - 自动记录任务创建时间
+- 💾 **数据持久化** - 本地存储，刷新不丢失
+
+### 优先级颜色
+| 优先级 | 颜色 | 描述 |
+|--------|------|------|
+| 🔴 高 | 红色 | 重要且紧急的任务 |
+| 🟡 中 | 橙色 | 一般重要的任务 |
+| 🟢 低 | 绿色 | 不紧急的任务 |
+
+### UI 特色
+- 🌟 **赛博朋克风格** - 深色背景配霓虹光效
+- 📱 **响应式设计** - 支持手机、平板、电脑
+- ✨ **流畅动画** - 按钮、卡片都有过渡效果
+- 🎨 **玻璃态设计** - 现代毛玻璃视觉效果
+
+## 🚀 快速开始
+
+### 环境要求
+- Node.js 18+
+- npm / yarn / pnpm
+
+### 安装
 
 ```bash
+# 克隆项目
+git clone https://github.com/WenOwen/openclaw.git
+cd openclaw
+
+# 安装依赖
+npm install
+
+# 启动开发服务器
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 访问应用
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 本地访问: http://localhost:3000
+- Codespace访问: https://friendly-space-trout-ggxqxj65457hv7g6-3000.app.github.dev/?vsBrowser=1
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📖 使用指南
 
-## Learn More
+### 添加任务
+1. 在输入框中输入任务内容
+2. 选择优先级（高/中/低）
+3. 点击"添加"按钮或按回车
 
-To learn more about Next.js, take a look at the following resources:
+### 编辑任务
+1. 点击任务右侧的"编辑"按钮
+2. 修改任务内容或优先级
+3. 点击"保存"或"取消"
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 删除任务
+1. 点击任务右侧的"删除"按钮
+2. 任务将立即被移除
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 筛选任务
+- **全部** - 显示所有任务
+- **进行中** - 显示未完成的任务
+- **已完成** - 显示已完成的任务
+- **优先级筛选** - 按高/中/低筛选
 
-## Deploy on Vercel
+## 🛠️ 技术栈
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **框架**: Next.js 16 (App Router)
+- **语言**: TypeScript
+- **样式**: Tailwind CSS
+- **状态管理**: React useState + useEffect
+- **数据存储**: Browser LocalStorage
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📁 项目结构
+
+```
+openclaw/
+├── app/
+│   ├── globals.css      # 全局样式（赛博朋克主题）
+│   ├── layout.tsx       # 根布局组件
+│   └── page.tsx         # 主页面组件（TodoList逻辑）
+├── public/              # 静态资源
+├── package.json         # 项目配置
+├── tailwind.config.ts   # Tailwind配置
+├── tsconfig.json        # TypeScript配置
+└── next.config.ts       # Next.js配置
+```
+
+## 🎨 自定义
+
+### 修改颜色主题
+在 `app/globals.css` 中修改颜色变量：
+
+```css
+:root {
+  --background: #0a0e27;    /* 背景色 */
+  --accent-blue: #00d4ff;   /* 青色强调 */
+  --accent-purple: #b14eff; /* 紫色强调 */
+  --accent-pink: #ff006e;   /* 粉色强调 */
+}
+```
+
+### 修改优先级颜色
+在 `app/page.tsx` 中修改 `priorityConfig` 对象：
+
+```typescript
+const priorityConfig = {
+  high: { 
+    label: '高', 
+    color: 'from-red-600 to-red-500',  // 渐变色
+    // ...
+  },
+  // ...
+};
+```
+
+## 🔧 部署
+
+### Vercel 部署（推荐）
+
+```bash
+# 安装 Vercel CLI
+npm i -g vercel
+
+# 部署
+vercel
+```
+
+### Docker 部署
+
+```dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+RUN npm run build
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+## 📝 更新日志
+
+### v1.1.0
+- ✅ 添加优先级筛选功能
+- ✅ 优化任务颜色显示
+- ✅ 增加发光效果
+
+### v1.0.0
+- ✅ 初始版本
+- ✅ 基本任务管理功能
+- ✅ 优先级系统
+- ✅ 赛博朋克UI风格
+
+## 🤝 贡献
+
+欢迎提交 Issue 和 Pull Request！
+
+## 📄 许可证
+
+MIT License
+
+---
+
+**Made with ❤️ by Gitty** 🐙
